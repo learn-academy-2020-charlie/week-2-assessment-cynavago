@@ -16,37 +16,41 @@
     // No need to change anything ABOVE this line ^
 
 
-
+//We create a new component that extends the React.Component class, which React provides.
     class App extends React.Component{
+      //created a constructor and super and passes in props
       constructor(props){
         super(props)
+        //this.state is set equal to an object with one key:value pair (key:mood, currentMood, setMood, value: smileys, 0, null)
         this.state = {
           moods: ["😃", "😴", "😍", "🥺", "😡", "🤓", "🤪"],
           currentMood: 0,
           setMood: null
         }
       }
-
       nextMood = () => {
-        if(currentMood === moods.length - 1){
-          this.setState({ currentMood: currentMood = 0 })
+        //create a function so that our application knows what to do when 1st button is pressed: move to next mood option. The currentMood starts at index 0 (array.length = 1). Line 33 states that if the state of currentMood is equal to index 6 (which is array.length = 7, the last emoji), then you go back to index 0 (the first emoji).
+        if(this.state.currentMood === this.state.moods.length - 1 ){
+          this.setState({ currentMood: this.state.currentMood = 0 })
+        //else, the state of currentMood should just keep adding + 1 if you are at index 0, 1, 2, 3, 4, 5. 
         } else {
-          this.setState({ currentMood: currentMood + 1 })
+          this.setState({ currentMood: this.state.currentMood + 1 })
         }
       }
-
+      //create a function so that our application knows what to do when 2nd button is pressed: you want to set mood. this changes the currentMood to a permanent state of the currentMood.
       setThisMood = () => {
         this.setState({ setMood: this.state.moods[this.state.currentMood] })
       }
-
+      //text and buttons section
       render(){
         return(
+          <div>
             <h1>Welcome to the Mood Meter App</h1>
             <h3>Mood Options:</h3>
             <p style={{fontSize: "50px"}}>
               { this.state.moods[this.state.currentMood] }
             </p>
-            <button onClick={ }>
+            <button onClick={ this.nextMood }>
               Click Here For Next Mood Option
             </button>
             <h3>Save your mood here!</h3>
@@ -56,7 +60,17 @@
             <h3>My mood:</h3>
             <p style={{fontSize: "50px"}}>
               { this.state.setMood }
+            </p>  
+            <p> 
+                <h4>The 3 errors on this page were: </h4>
+                  <ol>
+                  <li>First button did not call the method nextMood</li>
+                  <li>The text/buttons needed to be surrounded by div tags</li>
+                  <li>this.state needed to be added to nextMood</li>
+                  </ol>
             </p>
+
+          </div>  
         )
       }
     }
@@ -69,3 +83,5 @@
     </script>
   </body>
 </html>
+
+
